@@ -21,6 +21,8 @@ import java.util.UUID;
 @RequestMapping("/hotel")
 public class HotelManagementController {
 
+    HotelManagementService service = new HotelManagementService();
+
     @PostMapping("/add-hotel")
     public String addHotel(@RequestBody Hotel hotel){
 
@@ -30,7 +32,7 @@ public class HotelManagementController {
         //in all other cases return SUCCESS after successfully adding the hotel to the hotelDb.
 
 
-        return null;
+        return service.addHotel(hotel);
     }
 
     @PostMapping("/add-user")
@@ -39,7 +41,7 @@ public class HotelManagementController {
         //You need to add a User Object to the database
         //Assume that user will always be a valid user and return the aadharCardNo of the user
 
-       return null;
+       return service.addUser(user);
     }
 
     @GetMapping("/get-hotel-with-most-facilities")
@@ -49,7 +51,7 @@ public class HotelManagementController {
         //Incase there is a tie return the lexicographically smaller hotelName
         //Incase there is not even a single hotel with atleast 1 facility return "" (empty string)
 
-        return null;
+        return service.getHotelWithMostFacilities();
     }
 
     @PostMapping("/book-a-room")
@@ -62,14 +64,14 @@ public class HotelManagementController {
         //If there arent enough rooms available in the hotel that we are trying to book return -1 
         //in other case return total amount paid 
         
-        return 0;
+        return service.bookARoom(booking);
     }
     
     @GetMapping("/get-bookings-by-a-person/{aadharCard}")
     public int getBookings(@PathVariable("aadharCard")Integer aadharCard)
     {
         //In this function return the bookings done by a person 
-        return 0;
+        return service.getBooking(aadharCard);
     }
 
     @PutMapping("/update-facilities")
@@ -79,7 +81,7 @@ public class HotelManagementController {
         //If the hotel is already having that facility ignore that facility otherwise add that facility in the hotelDb
         //return the final updated List of facilities and also update that in your hotelDb
         //Note that newFacilities can also have duplicate facilities possible
-        return null;
+        return service.updateFacilities(newFacilities, hotelName);
     }
 
 }
